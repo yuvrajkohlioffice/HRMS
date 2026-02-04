@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, List
 from datetime import datetime, timezone
 
+# --- COMPANY MODELS ---
 class Company(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
@@ -43,6 +44,7 @@ class CompanyUpdate(BaseModel):
     website: Optional[str] = None
     is_active: Optional[bool] = None
 
+# --- BRANCH MODELS ---
 class Branch(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
@@ -64,6 +66,7 @@ class BranchCreate(BaseModel):
     address: Optional[str] = None
     phone: Optional[str] = None
 
+# --- DEPARTMENT MODELS ---
 class Department(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
@@ -80,11 +83,19 @@ class Department(BaseModel):
 
 class DepartmentCreate(BaseModel):
     company_id: str
-    branch_id: Optional[str] = None
+    branch_id: Optional[str] = None # Department usually belongs to a specific branch
     name: str
     code: str
     manager_id: Optional[str] = None
 
+class DepartmentUpdate(BaseModel):
+    branch_id: Optional[str] = None
+    name: Optional[str] = None
+    code: Optional[str] = None
+    manager_id: Optional[str] = None
+    is_active: Optional[bool] = None
+
+# --- TEAM MODELS ---
 class Team(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
